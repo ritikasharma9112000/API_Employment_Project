@@ -2,3 +2,277 @@
 @model API_Employment_Project.Pages.IndexModel
 @{
 }
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Employment Project</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:burlywood;">
+
+    <!-- Navigation bar code -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning">
+        <a class="navbar-brand" href="#">Employment Project</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <button class="btn btn-outline-dark" data-toggle="modal" data-target="#addEmployeeTemp">Add new Employee</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- following division is creating main area of the web page where all employee data will display -->
+    <div class="container">
+        <div class="row" id="allEmployee">
+        </div>
+    </div>
+
+
+    <!-- below mentioned code will create the template to add a new employee data -->
+    <div class="modal" tabindex="-1" role="dialog" id="addEmployeeTemp">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="book_Title">Employer name</label>
+                            <input type="text" class="form-control" id="employer_name" aria-describedby="employer_nameHelp" placeholder="Employer name">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Address of employer</label>
+                            <input type="text" class="form-control" id="address_of_employer" aria-describedby="address_of_employerHelp" placeholder="Address of employer">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="publisher">Job role</label>
+                            <input type="text" class="form-control" id="job_role" aria-describedby="job_roleHelp" placeholder="Job role">
+                        </div>
+                        <div class="form-group">
+                            <label for="year_of_publish">Job salary</label>
+                            <input type="number" class="form-control" id="job_salary" aria-describedby="job_salaryHelp" placeholder="Job salary">
+                        </div>
+                        <div class="form-group">
+                            <label for="year_of_publish">Job type</label>
+                            <input type="text" class="form-control" id="job_type" aria-describedby="job_typeHelp" placeholder="Job type">
+                        </div>
+
+                        <div class="form-group" id="result">
+
+
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="addEmployee()">Add Employee</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- below mentioned code will create the template to add a new employee data -->
+    <div class="modal" tabindex="-1" role="dialog" id="UpdateEmployee">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">update Employee</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="Update_id" aria-describedby="IdHelp">
+                        </div>
+                        <div class="form-group">
+                            <label for="book_Title">Employer name</label>
+                            <input type="text" class="form-control" id="update_employer_name" aria-describedby="employer_nameHelp" placeholder="Employer name">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Address of employer</label>
+                            <input type="text" class="form-control" id="update_address_of_employer" aria-describedby="address_of_employerHelp" placeholder="Address of employer">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="publisher">Job role</label>
+                            <input type="text" class="form-control" id="update_job_role" aria-describedby="job_roleHelp" placeholder="Job role">
+                        </div>
+                        <div class="form-group">
+                            <label for="year_of_publish">Job salary</label>
+                            <input type="number" class="form-control" id="update_job_salary" aria-describedby="job_salaryHelp" placeholder="Job salary">
+                        </div>
+                        <div class="form-group">
+                            <label for="year_of_publish">Job type</label>
+                            <input type="text" class="form-control" id="update_job_type" aria-describedby="job_typeHelp" placeholder="Job type">
+                        </div>
+
+                        <div class="form-group" id="update_result">
+
+
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="updateEmployee()">update Employee</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- java script files that will help to link the front end and back end -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        var uri = 'api/Employments';
+        //Java script main function so JS start from here
+        $(document).ready(function () {
+            $.getJSON(uri)
+                .done(function (data) {
+                    $("#EmployeeTemplate").tmpl(data).appendTo("#allEmployee");
+                });
+        });
+        // function to get all employee data and show on web page
+        function getAllEmployee() {
+            $.getJSON(uri)
+                .done(function (data) {
+                    $("#allEmployee").text("");
+                    $("#EmployeeTemplate").tmpl(data).appendTo("#allEmployee");
+                });
+        }
+
+
+        // function to add data for new employee
+        function addEmployee() {
+            var _employer_name = $('#employer_name').val();
+            var _address_of_employer = $('#address_of_employer').val();
+            var _job_role = $('#job_role').val();
+            var _job_salary = parseFloat($('#job_salary').val());
+            var _job_type = ($('#job_type').val());
+
+            var employee = {
+                employer_name: _employer_name,
+                address_of_employer: _address_of_employer,
+                job_role: _job_role,
+                job_salary: _job_salary,
+                job_type: _job_type
+            };
+
+            $.ajax({
+                type: "POST",
+                url: uri,
+                data: JSON.stringify(employee),
+                contentType: "application/json; charset=utf-8"
+            }).done(function (response) {
+                $("#result").html("Success");
+                getAllEmployee();
+            }).fail(function (jqXHR, textStatus) {
+                $("#result").html("An error occured when Adding the employee record.");
+            });
+        }
+
+        // funtion to fill the data into update template
+        function getEmployeeForUpdate(id) {
+            $.ajax({
+                type: "GET",
+                url: uri + "/" + id,
+                contentType: "application/json"
+            }).done(function (response) {
+                $('#Update_id').val(response.id);
+                $('#update_employer_name').val(response.employer_name);
+                $('#update_address_of_employer').val(response.address_of_employer);
+                $('#update_job_role').val(response.job_role);
+                $('#update_job_salary').val(response.job_salary);
+                $('#update_job_type').val(response.job_type);
+            });
+        }
+        // function to update data of the student
+        function updateEmployee() {
+            var _employer_name = $('#update_employer_name').val();
+            var _address_of_employer = $('#update_address_of_employer').val();
+            var _job_role = $('#update_job_role').val();
+            var _job_salary = $('#update_job_salary').val();
+            var _job_type = $('#update_job_type').val();
+
+            var EmployeeUpdate = {
+                id: parseInt($('#Update_id').val()),
+                employer_name: _employer_name,
+                address_of_employer: _address_of_employer,
+                job_role: _job_role,
+                job_salary: _job_salary,
+                job_type: _job_type,
+            };
+            $.ajax({
+                type: "PUT",
+                url: uri + "/" + $('#Update_id').val(),
+                data: JSON.stringify(EmployeeUpdate),
+                contentType: "application/json; charset=utf-8"
+            }).done(function (response) {
+                $("#update_result").html("Record is updated Successfully");
+                getAllEmployee();
+            }).fail(function (jqXHR, textStatus) {
+                $("#update_result").html("An error occured when updating student record.");
+            });
+        }
+
+        //funtion to delete a particular student based on id//
+
+        function remove(id) {
+            var yes = confirm("Are you sure you want to delete this employee?");
+            if (yes) {
+                $.ajax({
+                    type: "DELETE",
+                    url: uri + "/" + id,
+                }).done(function (response) {
+                    $("#result").html("Employee data is deleted successfully");
+                    getAllEmployee();
+                }).fail(function (jqXHR, textStatus) {
+                    $("#result").html("An error occured when deleting the employee record.");
+                });
+            }
+        }
+    </script>
+    <!--below mentioned code will create the template on the web page to show all enployee data-->
+    <script id="EmployeeTemplate" type="text/x-jquery-tmpl">
+        <div class="col-lg-3" style="margin:10px;">
+            <div class="card card text-white bg-dark border-warning mb-3" style="width: 18rem; padding:20px">
+                <div class="card-body">
+                    <h5 class="card-title">Employer name: ${employer_name}</h5>
+                    <p class="card-text">Address of employer :  ${address_of_employer}</p>
+                    <p class="card-text">Job role : ${job_role}</p>
+                    <p class="card-text">Job salary : ${job_salary}</p>
+                    <p class="card-text">Job type : ${job_type}</p>
+                </div>
+                <span>
+                    <button class="btn btn-primary" onclick="getEmployeeForUpdate('${id}')" data-toggle="modal" data-target="#UpdateEmployee">Update</button>
+                    <a href="#" class="btn btn-danger" onclick="remove('${id}')">Delete</a>
+                </span>
+            </div>
+        </div>
+    </script>
+</body>
+</html>
+
+
+
+
+

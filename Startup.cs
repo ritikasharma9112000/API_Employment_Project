@@ -49,7 +49,7 @@ namespace API_Employment_Project
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
