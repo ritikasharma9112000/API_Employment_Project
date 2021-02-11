@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace API_Employment_Project.Model
 {
+    //This modal class shows all the data of employees//
     public class Employment
     {
         public int id { get; set; }
